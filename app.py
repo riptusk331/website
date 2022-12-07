@@ -4,4 +4,4 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return jsonify(request.headers)
+    return jsonify(dict(request.headers))
