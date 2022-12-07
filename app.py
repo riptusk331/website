@@ -26,8 +26,9 @@ app.json_encoder = MyJSONEncoder
 @app.route("/")
 def home():
     user_agent = user_agent_parser.Parse(request.headers["User-Agent"])
+    addr = request.access_route[0] if request.access_route else request.remote_addr
     return (
-        f"Welcome to Ryan's website. It looks like you're visiting me from {request.remote_addr} on a "
+        f"Welcome to Ryan's website. It looks like you're visiting me from {addr} on a "
         f"{user_agent['os']['family']} {user_agent['os']['major']} machine running "
         f"{user_agent['user_agent']['family']} {user_agent['user_agent']['major']}.{user_agent['user_agent']['minor']}"
     )
