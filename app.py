@@ -32,3 +32,8 @@ def home():
         f"{user_agent['os']['family']} {user_agent['os']['major']} machine running "
         f"{user_agent['user_agent']['family']} {user_agent['user_agent']['major']}.{user_agent['user_agent']['minor']}"
     )
+
+
+@app.route("/test")
+def test():
+    return jsonify(request.__dict__)
