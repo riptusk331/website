@@ -29,7 +29,7 @@ app = ProxyFix(myapp, x_for=1, x_proto=1)
 def home():
     user_agent = user_agent_parser.Parse(request.headers["User-Agent"])
     return (
-        f"Welcome to Ryan's website. It looks like you're visiting me from {request.remote_addr} on a "
+        f"Welcome to Ryan's website. It looks like you're visiting me from {request.remote_addr.split(':')[0]} on a "
         f"{user_agent['os']['family']} {user_agent['os']['major']} machine running "
         f"{user_agent['user_agent']['family']} {user_agent['user_agent']['major']}.{user_agent['user_agent']['minor']}"
     )
