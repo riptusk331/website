@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request
-from pprint import pformat
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template(pformat(request.headers))
+    return jsonify(request.headers)
