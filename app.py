@@ -36,4 +36,4 @@ def home():
 
 @app.route("/test")
 def test():
-    return jsonify(request.__dict__)
+    return jsonify(dict(request.headers))
