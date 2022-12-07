@@ -16,8 +16,7 @@ class MyJSONEncoder(JSONEncoder):
             encoder = super().default(obj)
         except TypeError:
             encoder = obj.__repr__()
-        finally:
-            return encoder
+        return encoder
 
 
 app = Flask(__name__)
