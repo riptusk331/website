@@ -1,5 +1,6 @@
 from datetime import date, datetime
 from flask import Flask, jsonify, request
+from werkzeug.middleware.proxy_fix import ProxyFix
 from simplejson import JSONEncoder
 from ua_parser import user_agent_parser
 
@@ -19,21 +20,21 @@ class MyJSONEncoder(JSONEncoder):
         return encoder
 
 
-app = Flask(__name__)
-app.json_encoder = MyJSONEncoder
+myapp = Flask(__name__)
+myapp.json_encoder = MyJSONEncoder
+app = ProxyFix(myapp, x_for=1, x_proto=1)
 
 
-@app.route("/")
+@myapp.route("/")
 def home():
     user_agent = user_agent_parser.Parse(request.headers["User-Agent"])
-    addr = request.access_route[0] if request.access_route else request.remote_addr
     return (
-        f"Welcome to Ryan's website. It looks like you're visiting me from {addr} on a "
+        f"Welcome to Ryan's website. It looks like you're visiting me from {request.remote_addr} on a "
         f"{user_agent['os']['family']} {user_agent['os']['major']} machine running "
         f"{user_agent['user_agent']['family']} {user_agent['user_agent']['major']}.{user_agent['user_agent']['minor']}"
     )
 
 
-@app.route("/test")
+@myapp.route("/test")
 def test():
     return jsonify(dict(request.headers))
