@@ -2,12 +2,14 @@ import { Container, Nav, Navbar, NavDropdown, Col, Row, Stack } from "react-boot
 import { LinkContainer } from "react-router-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import logo from "./rj-logo.png"
 
 export const SiteNavbar = () => {
     const [liBounce, setLiBounce] = useState(false);
     const [ghBounce, setGhBounce] = useState(false);
+    const [emBounce, setEmBounce] = useState(false);
 
     return (
         <header>
@@ -40,6 +42,11 @@ export const SiteNavbar = () => {
                         </Navbar.Collapse>
                     </div>
                     <div className="ms-auto" id="icons">
+                        <span className="p-1" onMouseEnter={() => setEmBounce(true)} onMouseLeave={() => setEmBounce(false)}>
+                            <a href="mailto: ryan.joyce.88@gmail.com" style={{ color: "inherit" }}>
+                                <FontAwesomeIcon icon={faEnvelope} size="2x" bounce={emBounce} />
+                            </a>
+                        </span>
                         <span className="p-1" onMouseEnter={() => setGhBounce(true)} onMouseLeave={() => setGhBounce(false)}>
                             <a href="https://github.com/riptusk331" style={{ color: "inherit" }}>
                                 <FontAwesomeIcon icon={faGithub} size="2x" bounce={ghBounce} />
